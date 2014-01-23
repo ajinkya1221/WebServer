@@ -1,2 +1,7 @@
 c:\users\admin\documents\visual studio 2012\Projects\Training.Assignment.Webserver\MyHttpWebServer\bin\Debug\MyHttpWebServer.exe.config
 C:\Ajinkya\Training.Assignment.Webserver\MyHttpWebServer\bin\Debug\MyHttpWebServer.exe.config
+C:\Ajinkya\Training.Assignment.Webserver\MyHttpWebServer\bin\Debug\MyHttpWebServer.exe
+C:\Ajinkya\Training.Assignment.Webserver\MyHttpWebServer\bin\Debug\MyHttpWebServer.pdb
+C:\Ajinkya\Training.Assignment.Webserver\MyHttpWebServer\obj\Debug\MyHttpWebServer.csprojResolveAssemblyReference.cache
+C:\Ajinkya\Training.Assignment.Webserver\MyHttpWebServer\obj\Debug\MyHttpWebServer.exe
+C:\Ajinkya\Training.Assignment.Webserver\MyHttpWebServer\obj\Debug\MyHttpWebServer.pdb

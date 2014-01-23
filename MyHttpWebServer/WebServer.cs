@@ -21,5 +21,10 @@ namespace MyHttpWebServer
             Listener.Port = port;
             Listener.Start();
         }
+
+        public void Stop()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
