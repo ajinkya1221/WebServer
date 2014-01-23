@@ -10,6 +10,7 @@ namespace MyHttpWebServer
     {
 
         public PortListener Listener { get; set; }
+        public static string RootDirectory { get; set; }
 
         public WebServer(PortListener listener)
         {
@@ -18,6 +19,7 @@ namespace MyHttpWebServer
 
         public void Start(int port, string rootDirectory)
         {
+            RootDirectory = rootDirectory;
             Listener.Port = port;
             Listener.Start();
         }

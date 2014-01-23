@@ -16,10 +16,17 @@ namespace MyHttpWebServer
         {
             var tcpListener = new TcpListener(IPAddress.Any, Port);
             tcpListener.Start();
+            while (true)
+            {
+                if (NetworkSocket.flag == true)
+                {
+                    break;                    
+                }
+                var socket = tcpListener.AcceptSocket();
+                var socketProcessor = new SocketProcessor();
+                socketProcessor.Handle(new NetworkSocket(socket));    
+            }
             
-            var socket = tcpListener.AcceptSocket();
-            var socketProcessor = new SocketProcessor();
-            socketProcessor.Handle(new NetworkSocket(socket));
         }
 
         public void Stop()

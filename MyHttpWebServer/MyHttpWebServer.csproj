@@ -41,6 +41,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="HttpAdapter.cs" />
+    <Compile Include="HttpRequest.cs" />
+    <Compile Include="HttpResponse.cs" />
     <Compile Include="NetworkSocket.cs" />
     <Compile Include="PortListener.cs" />
     <Compile Include="ServerRunner.cs" />
