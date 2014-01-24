@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using Microsoft.Win32;
 
 namespace MyHttpWebServer
@@ -21,25 +17,20 @@ namespace MyHttpWebServer
             Httpresponse = new HttpResponse();
             if (Method == "GET")
             {
-                string rootdirectory = WebServer.RootDirectory.Replace("\\", "/");
-                var requestFile = Path.Combine(rootdirectory, Url.TrimStart('/'));
-                if (String.CompareOrdinal(requestFile, rootdirectory) == 0)
-                    requestFile = requestFile + "/index.html";
-                
+                var requestFilePath = GetPath();
                 try
                 {
-                    if (File.Exists(requestFile))
-                    {
-                        Httpresponse.Data = File.ReadAllText(requestFile);
-                        var extension = Path.GetExtension(requestFile);
-                        Httpresponse.ContentType = GetContentType(extension.TrimStart(".".ToCharArray()));
+                    if (File.Exists(requestFilePath))
+                    {                        
+                        Httpresponse.Data = File.ReadAllText(requestFilePath);
+                        var extension = Path.GetExtension(requestFilePath);
+                        if (extension != null)
+                            Httpresponse.ContentType = GetContentType(extension.TrimStart(".".ToCharArray()));
                         Httpresponse.StatusCode = "200 OK";
                     }
                     else
                     {
-                        Httpresponse.Data = "<html><body><h1>404 File Not Found</h1></body></html>";
-                        Httpresponse.ContentType = GetContentType("html");
-                        Httpresponse.StatusCode = "404 Not found";
+                        FileNotFound();   
                     }
                 }
                 catch (Exception exception)
@@ -49,13 +40,34 @@ namespace MyHttpWebServer
                     Httpresponse.StatusCode = "500 Internal server error";
                 }
 
-                Httpresponse.KeepAlive = "Close";
-                Httpresponse.Server = "";
-                Httpresponse.ContentLength = Httpresponse.Data.Length;
-                Httpresponse.Version = Version;
+                SetOtherResponseFields();
             }            
             return Httpresponse;
             //throw new NotImplementedException();
+        }
+
+        private string GetPath()
+        {
+            string rootdirectory = WebServer.RootDirectory.Replace("\\", "/");
+            var requestFile = Path.Combine(rootdirectory, Url.TrimStart('/'));
+            if (String.CompareOrdinal(requestFile, rootdirectory) == 0)
+            requestFile = requestFile + "/index.html";
+            return requestFile;
+        }
+
+        private void FileNotFound()
+        {
+            Httpresponse.Data = "<html><body><h1>404 File Not Found</h1></body></html>";
+            Httpresponse.ContentType = GetContentType("html");
+            Httpresponse.StatusCode = "404 Not found";
+        }
+
+        private void SetOtherResponseFields()
+        {
+            Httpresponse.KeepAlive = "Close";
+            Httpresponse.Server = "";
+            Httpresponse.ContentLength = Httpresponse.Data.Length;
+            Httpresponse.Version = Version;
         }
 
         private string GetContentType(string extension)

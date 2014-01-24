@@ -16,5 +16,11 @@ namespace MyHttpWebserver.Test
             WebServer webServer = new WebServer(new PortListener());
             webServer.Start(8080, "rootDirectory");
         }
+
+        public void TestPortListener()
+        {
+            PortListener portListener = new PortListener() {Port = 8080};
+            portListener.Start();
+        }
     }
 }

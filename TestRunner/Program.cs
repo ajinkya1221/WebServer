@@ -13,6 +13,7 @@ namespace TestRunner
         {
             TestCases testcase1 = new TestCases();
             testcase1.TestWebServer();
+            testcase1.TestPortListener();
             Console.ReadKey(true);
         }
     }

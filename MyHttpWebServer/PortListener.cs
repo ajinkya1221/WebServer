@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net;
 using System.Net.Sockets;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MyHttpWebServer
 {
@@ -14,15 +10,19 @@ namespace MyHttpWebServer
 
         public void Start()
         {
+            Socket socket = null;
             var tcpListener = new TcpListener(IPAddress.Any, Port);
             tcpListener.Start();
+            NetworkSocket.Flag = false;
             while (true)
             {
-                if (NetworkSocket.flag == true)
+                if (NetworkSocket.Flag == true)
                 {
-                    break;                    
+                    socket.Close();
+                    tcpListener.Stop();
+                    break;
                 }
-                var socket = tcpListener.AcceptSocket();
+                socket = tcpListener.AcceptSocket();
                 var socketProcessor = new SocketProcessor();
                 socketProcessor.Handle(new NetworkSocket(socket));    
             }

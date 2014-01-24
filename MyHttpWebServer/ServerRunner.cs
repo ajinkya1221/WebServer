@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MyHttpWebServer
 {
@@ -17,7 +13,7 @@ namespace MyHttpWebServer
             Console.WriteLine("Press any key to exit.");
             myServer.Start(port,args[1]);
             Console.ReadKey();
-            //myServer.Dispose();
+            
         }
     }
 }

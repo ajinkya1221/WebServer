@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace MyHttpWebServer
 {
@@ -14,16 +12,28 @@ namespace MyHttpWebServer
         private int _index;
         public HttpRequest ToHttoRequest(byte[] bytes)
         {
-            _requestString = System.Text.Encoding.UTF8.GetString(bytes);
-            _index = _requestString.IndexOf("\r\n", System.StringComparison.Ordinal);
-            _firstLineOfRequest = _requestString.Substring(0, _index);
-
-            Httprequest = new HttpRequest
+            _requestString = Encoding.UTF8.GetString(bytes);
+            _index = _requestString.IndexOf("\r\n", StringComparison.Ordinal);
+            if (_index != -1)
             {
-                Method = _firstLineOfRequest.Split(' ')[0],
-                Url = _firstLineOfRequest.Split(' ')[1],
-                Version = _firstLineOfRequest.Split(' ')[2]
-            };
+                _firstLineOfRequest = _requestString.Substring(0, _index);    
+            }
+
+            try
+            {
+                Httprequest = new HttpRequest
+                {
+                    Method = _firstLineOfRequest.Split(' ')[0],
+                    Url = _firstLineOfRequest.Split(' ')[1],
+                    Version = _firstLineOfRequest.Split(' ')[2]
+                };
+            }
+            catch (NullReferenceException)
+            {
+                
+                
+            }
+           
 
             return Httprequest;
             //throw new NotImplementedException();
@@ -39,13 +49,10 @@ namespace MyHttpWebServer
                                               + "\r\n",
                                               response.StatusCode, response.Server, response.Data.Length, response.ContentType, response.KeepAlive);
 
-            string tempResponse = tempHeader + response.Data;
             byte[] headerbytes = Encoding.ASCII.GetBytes(tempHeader);
             byte[] responsebytes = Encoding.ASCII.GetBytes(response.Data);
 
-            List<byte[]> listOfByteArray = new List<byte[]>();
-            listOfByteArray.Add(headerbytes);
-            listOfByteArray.Add(responsebytes);
+            var listOfByteArray = new List<byte[]> {headerbytes, responsebytes};
 
             return listOfByteArray;
                         
