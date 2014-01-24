@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net.Sockets;
+using System.Runtime.Remoting.Contexts;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -19,6 +20,8 @@ namespace MyHttpWebServer
             TcpSocket = socket;
         }
 
+        
+
         public byte[] GetRequest()
         {
             _networkStream = new NetworkStream(TcpSocket,true);
@@ -34,8 +37,9 @@ namespace MyHttpWebServer
                 //{
                 //    ms.Write(buffer, 0, read);
                 //}
-                _networkStream.CopyTo(ms);
-                byte[] buffer = ms.ToArray();
+                byte[] buffer = new byte[16*1024];//ms.ToArray();
+                _networkStream.ReadAsync(buffer,0,buffer.Length);
+                
                 return buffer;
 
             }
@@ -43,11 +47,14 @@ namespace MyHttpWebServer
         }
 
         public static bool flag = false;
+        //private Task<Socket> socket;
 
-        public void WriteResponse(byte[] response)
+        public void WriteResponse(List<byte[]> response )
         {
-            flag = true;
-            _networkStream.Write(response, 0, response.Length);
+            //flag = true;
+            this._networkStream.WriteAsync(response[0], 0, response[0].Length);
+            this._networkStream.WriteAsync(response[1], 0, response[1].Length);            
+            
             _networkStream.Flush();
             _networkStream.Dispose();
         }

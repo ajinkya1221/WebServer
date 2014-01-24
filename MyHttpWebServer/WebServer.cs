@@ -20,7 +20,7 @@ namespace MyHttpWebServer
         public void Start(int port, string rootDirectory)
         {
             RootDirectory = rootDirectory;
-            Listener.Port = port;
+            Listener.Port = port;            
             Listener.Start();
         }
 

@@ -29,7 +29,7 @@ namespace MyHttpWebServer
             //throw new NotImplementedException();
         }
 
-        public byte[] ToBytes(HttpResponse response)
+        public List<byte[]> ToBytes(HttpResponse response)
         {
             string tempHeader = string.Format("HTTP/1.1 {0}\r\n"
                                               + "Server: {1}\r\n"
@@ -40,11 +40,15 @@ namespace MyHttpWebServer
                                               response.StatusCode, response.Server, response.Data.Length, response.ContentType, response.KeepAlive);
 
             string tempResponse = tempHeader + response.Data;
-            byte[] bytes = Encoding.ASCII.GetBytes(tempResponse);
+            byte[] headerbytes = Encoding.ASCII.GetBytes(tempHeader);
+            byte[] responsebytes = Encoding.ASCII.GetBytes(response.Data);
 
-            return bytes;
-            
-            throw new NotImplementedException();
+            List<byte[]> listOfByteArray = new List<byte[]>();
+            listOfByteArray.Add(headerbytes);
+            listOfByteArray.Add(responsebytes);
+
+            return listOfByteArray;
+                        
         }
     }
 }

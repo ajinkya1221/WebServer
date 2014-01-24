@@ -21,7 +21,7 @@ namespace MyHttpWebServer
             Httpresponse = new HttpResponse();
             if (Method == "GET")
             {
-                string rootdirectory = WebServer.RootDirectory;
+                string rootdirectory = WebServer.RootDirectory.Replace("\\", "/");
                 var requestFile = Path.Combine(rootdirectory, Url.TrimStart('/'));
                 if (String.CompareOrdinal(requestFile, rootdirectory) == 0)
                     requestFile = requestFile + "/index.html";
@@ -50,8 +50,10 @@ namespace MyHttpWebServer
                 }
 
                 Httpresponse.KeepAlive = "Close";
-            }
-
+                Httpresponse.Server = "";
+                Httpresponse.ContentLength = Httpresponse.Data.Length;
+                Httpresponse.Version = Version;
+            }            
             return Httpresponse;
             //throw new NotImplementedException();
         }
