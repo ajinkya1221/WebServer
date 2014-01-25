@@ -4,6 +4,7 @@ namespace MyHttpWebServer
 {
     class ServerRunner
     {
+        public static bool Flag = false;
         static void Main(string[] args)
         {
             int port = int.Parse(args[0]);
@@ -21,7 +22,8 @@ namespace MyHttpWebServer
             Console.WriteLine("Press any key to exit.");
             myServer.Start(port,fullDirectoryPath);
             Console.ReadKey();
-            
+            Flag = true;
+
         }
     }
 }

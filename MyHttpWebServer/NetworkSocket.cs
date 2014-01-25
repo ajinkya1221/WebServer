@@ -23,7 +23,7 @@ namespace MyHttpWebServer
                 return buffer;
         }
 
-        public static bool Flag = false;
+        
         
         public void WriteResponse(List<byte[]> response )
         {                    
@@ -31,8 +31,12 @@ namespace MyHttpWebServer
             this._networkStream.WriteAsync(response[1], 0, response[1].Length);            
             
             _networkStream.Flush();
+            _networkStream.Close();
             _networkStream.Dispose();
-            Flag = true;
+            TcpSocket.Close();
+            TcpSocket.Dispose();
+            
+            //Flag = true;
         }
     }
 }

@@ -12,8 +12,15 @@ namespace MyHttpWebServer
         public string Version { get; set; }
         public HttpResponse Httpresponse { get; set; }
 
-        internal HttpResponse Execute()
+        public HttpRequest()
         {
+            Method = "";
+            Url = "";
+            Version = "";
+        }
+
+        internal HttpResponse Execute()
+         {
             Httpresponse = new HttpResponse();
             if (Method == "GET")
             {

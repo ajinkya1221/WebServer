@@ -10,5 +10,16 @@
         public int ContentLength { get; set; }
         public string Server { get; set; }
         public string KeepAlive { get; set; }
+
+        public HttpResponse()
+        {
+            StatusCode = "";
+            ContentType = "";
+            Data = "";
+            Version = "";
+            ContentLength = 0;
+            Server = "";
+            KeepAlive = "";
+        }
     }
 }

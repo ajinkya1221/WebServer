@@ -13,19 +13,24 @@ namespace MyHttpWebServer
             //Socket socket = null;
             var tcpListener = new TcpListener(IPAddress.Any, Port);
             tcpListener.Start();
-            NetworkSocket.Flag = false;
+            ServerRunner.Flag = false;
             while (true)
             {
-                if (NetworkSocket.Flag == true)
+                if (ServerRunner.Flag == true)
                 {
               //      socket.Close();
                     tcpListener.Stop();
                     break;
-                }                
-                var socket = tcpListener.AcceptSocket();
+                }
+                if (tcpListener.Pending())
+                {
+                    Socket socket = tcpListener.AcceptSocket();                    
+                    var socketProcessor = new SocketProcessor();
+                    socketProcessor.Handle(new NetworkSocket(socket));                    
+                }
                 
-                var socketProcessor = new SocketProcessor();
-                socketProcessor.Handle(new NetworkSocket(socket));    
+                
+                
             }
             
         }
