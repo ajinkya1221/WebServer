@@ -8,8 +8,8 @@
         {
             HttpAdapter = new HttpAdapter();
             var inputBytes = socket.GetRequest();
-            var httpRequest = this.HttpAdapter.ToHttoRequest(inputBytes);
-            var httpResponse = httpRequest.Execute();
+            HttpRequest httpRequest = this.HttpAdapter.ToHttoRequest(inputBytes);
+            HttpResponse httpResponse = httpRequest.Execute();
             var outputBytes = this.HttpAdapter.ToBytes(httpResponse);
             socket.WriteResponse(outputBytes);      
         }
