@@ -8,3 +8,6 @@ C:\Ajinkya\Training.Assignment.Webserver\MyHttpWebServer\obj\Debug\MyHttpWebServ
 D:\git projects\WebServer\MyHttpWebServer\bin\Debug\MyHttpWebServer.exe.config
 D:\git projects\WebServer\MyHttpWebServer\obj\Debug\MyHttpWebServer.exe
 D:\git projects\WebServer\MyHttpWebServer\obj\Debug\MyHttpWebServer.pdb
+D:\git projects\WebServer\MyHttpWebServer\bin\Debug\MyHttpWebServer.exe
+D:\git projects\WebServer\MyHttpWebServer\bin\Debug\MyHttpWebServer.pdb
+D:\git projects\WebServer\MyHttpWebServer\obj\Debug\MyHttpWebServer.csprojResolveAssemblyReference.cache

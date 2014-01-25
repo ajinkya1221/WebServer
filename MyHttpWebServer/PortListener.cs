@@ -10,7 +10,7 @@ namespace MyHttpWebServer
 
         public void Start()
         {
-            Socket socket = null;
+            //Socket socket = null;
             var tcpListener = new TcpListener(IPAddress.Any, Port);
             tcpListener.Start();
             NetworkSocket.Flag = false;
@@ -18,11 +18,12 @@ namespace MyHttpWebServer
             {
                 if (NetworkSocket.Flag == true)
                 {
-                    socket.Close();
+              //      socket.Close();
                     tcpListener.Stop();
                     break;
-                }
-                socket = tcpListener.AcceptSocket();
+                }                
+                var socket = tcpListener.AcceptSocket();
+                
                 var socketProcessor = new SocketProcessor();
                 socketProcessor.Handle(new NetworkSocket(socket));    
             }
