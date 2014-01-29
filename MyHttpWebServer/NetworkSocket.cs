@@ -31,10 +31,10 @@ namespace MyHttpWebServer
             this._networkStream.WriteAsync(response[1], 0, response[1].Length);            
             
             _networkStream.Flush();
-            _networkStream.Close();
-            _networkStream.Dispose();
-            TcpSocket.Close();
-            TcpSocket.Dispose();
+            //_networkStream.Close();
+            //_networkStream.Dispose();
+            //TcpSocket.Close();
+            //TcpSocket.Dispose();
             
             //Flag = true;
         }
