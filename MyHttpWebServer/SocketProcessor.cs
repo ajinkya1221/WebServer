@@ -1,4 +1,6 @@
-﻿namespace MyHttpWebServer
+﻿using System.Threading.Tasks;
+
+namespace MyHttpWebServer
 {
     public class SocketProcessor
     {
