@@ -57,6 +57,7 @@ namespace MyHttpWebServer
         {
             string rootdirectory = WebServer.RootDirectory.Replace("\\", "/");
             var requestFile = Path.Combine(rootdirectory, Url.TrimStart('/'));
+            requestFile = requestFile.Replace("\\", "/");
             if (String.CompareOrdinal(requestFile, rootdirectory) == 0)
             requestFile = requestFile + "/index.html";
             return requestFile;
